@@ -24,6 +24,8 @@ zoom: 16,
 
   bindDataLayerListeners(map.data);
 
+map.data.loadGeoJson("data/paths.json"
+
   // Retrieve HTML elements.
   var mapContainer = document.getElementById('map-holder');
   geoJsonOutput = document.getElementById('geojson-output');
