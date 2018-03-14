@@ -48,20 +48,20 @@ function init() {
   	 map.data.overrideStyle(selectedFeature,{strokeWeight: 6});
   });
 
-  map.data.addListener("rightclick",function(feature){
+  map.data.addListener("rightclick",function(rate){
 	  var metritis = 0;
-	  var colour;
+	  var currColour;
 	  if (metritis==5){metritis=0;}
 	  metritis++;
 	  
-	  if (metritis==1){ colour='red';}else 
-	  if (metritis==2){ colour='orange';}else
-	  if (metritis==3){ colour='yellow';}else
-	  if (metritis==4){ colour='green';}else
-	  if (metritis==5){ colour='blue';}
+	  if (metritis==1){ currColour='red';}else 
+	  if (metritis==2){ currColour='orange';}else
+	  if (metritis==3){ currColour='yellow';}else
+	  if (metritis==4){ currColour='green';}else
+	  if (metritis==5){ currColour='blue';}
 	  
-	  feature.setProperty("Rating", metritis);
-	  feature.setProperty("Colour", colour);
+	  rate.feature.setProperty("Rating", metritis);
+	  rate.feature.setProperty("Colour", currColour);
   });
 	
   map.data.loadGeoJson("data/geojson.json");
