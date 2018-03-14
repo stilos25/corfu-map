@@ -9,6 +9,8 @@ var selectedFeature;
 
 var PropertyValue="unknown";
 
+var metritis = 0;
+
 function init() {
   // Initialise the map.
   map = new google.maps.Map(document.getElementById('map-holder'), {
@@ -28,7 +30,7 @@ function init() {
   });
   
   map.data.setStyle(function(feature) {
-        var colour = 'white';
+        var colour = "white";
         if (feature.getProperty("Rating") == null && feature.getProperty("Colour") == null ) {
             feature.setProperty("Rating", PropertyValue);
             feature.setProperty("Colour", PropertyValue);
@@ -37,7 +39,7 @@ function init() {
             var colour = feature.getProperty("Colour");
         }
         return ({
-            strokeColour: colour,
+            strokeColor: colour,
             strokeWeight: 4
 	});
    });
@@ -49,21 +51,8 @@ function init() {
   });
 
   map.data.addListener("rightclick",function(rate){
-	  var metritis = 0;
-	  var currColour;
-	  
-	  if (metritis==5){metritis=0;}
-	  
-	  metritis++;
-	  
-	  if (metritis==1){ currColour='red';}else 
-	  if (metritis==2){ currColour='orange';}else
-	  if (metritis==3){ currColour='yellow';}else
-	  if (metritis==4){ currColour='green';}else
-	  if (metritis==5){ currColour='blue';}
-	  
-	  rate.feature.setProperty("Rating", metritis);
-	  rate.feature.setProperty("Colour", currColour);
+	  Rating(rate);
+	  console.log("mpike mes tin sinartisi");
   });
 	
   map.data.loadGeoJson("data/2016057.geojson");
@@ -126,5 +115,24 @@ function resize() {
   var geoJsonOutputRect = geoJsonOutput.getBoundingClientRect();
   var stiliRect = stili.getBoundingClientRect();
   geoJsonOutput.style.height = stiliRect.bottom - geoJsonOutputRect.top - 8 + "px";
+}
+
+function Rating(rate){
+	this.rate = rate;
+	
+	var currColour;
+	  
+	if (metritis==5){metritis=0;}
+	  
+	metritis++;
+	  
+	if (metritis==1){ currColour='red';}else 
+	if (metritis==2){ currColour='orange';}else
+	if (metritis==3){ currColour='yellow';}else
+	if (metritis==4){ currColour='green';}else
+	if (metritis==5){ currColour='blue';}
+
+	rate.feature.setProperty("Rating", metritis);
+	rate.feature.setProperty("Colour", currColour);
 }
 
