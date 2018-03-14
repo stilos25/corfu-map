@@ -66,7 +66,7 @@ function init() {
 	  rate.feature.setProperty("Colour", currColour);
   });
 	
-  map.data.loadGeoJson("data/geojson.json");
+  map.data.loadGeoJson("data/2016057.geojson");
 
   bindDataLayerListeners(map.data);
 
