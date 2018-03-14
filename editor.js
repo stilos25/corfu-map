@@ -7,6 +7,8 @@ var downloadLink;
 var stili;
 var selectedFeature;
 
+var PropertyValue="unknown";
+
 function init() {
   // Initialise the map.
   map = new google.maps.Map(document.getElementById('map-holder'), {
@@ -25,12 +27,42 @@ function init() {
     clickable: true
   });
   
+  map.data.setStyle(function(feature) {
+        var color = "white";
+        if (feature.getProperty("Rating") == null && feature.getProperty("Color") == null ) {
+            feature.setProperty("Rating", PropertyValue);
+            feature.setProperty("Color", PropertyValue);
+        }
+        if (feature.getProperty("Color") != PropertyValue) {
+            var color = feature.getProperty("Color");
+        }
+        return ({
+            strokeColor: color,
+            strokeWeight: 4
+	});
+   });
+	
   map.data.addListener("click",function(selected){
   	 selectedFeature = selected.feature;
   	 map.data.revertStyle();
   	 map.data.overrideStyle(selectedFeature,{strokeWeight: 6});
   });
 
+  map.data.addListener("rightclick",function(rate){
+	  var metritis = 0;
+	  var colour;
+	  if (metritis==5){metritis=0;}
+	  metritis++;
+	  
+	  if (metritis==1){ colour='red';}else 
+	  if (metritis==2){ colour='orange';}else
+	  if (metritis==3){ colour='yellow';}else
+	  if (metritis==4){ colour='green';}else
+	  if (metritis==5){ colour='blue';}
+	  
+	  rate.features.setProperty("Rating", metritis);
+  });
+	
   map.data.loadGeoJson("data/geojson.json");
 
   bindDataLayerListeners(map.data);
@@ -91,3 +123,4 @@ function resize() {
   var stiliRect = stili.getBoundingClientRect();
   geoJsonOutput.style.height = stiliRect.bottom - geoJsonOutputRect.top - 8 + "px";
 }
+
