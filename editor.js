@@ -31,7 +31,7 @@ function init() {
   	 map.data.overrideStyle(selectedFeature,{strokeWeight: 6});
   });
 
-  map.data.loadGeoJson("data/geojson1.json");
+  map.data.loadGeoJson("data/geojson.json");
 
   bindDataLayerListeners(map.data);
 
