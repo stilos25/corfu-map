@@ -51,7 +51,9 @@ function init() {
   map.data.addListener("rightclick",function(rate){
 	  var metritis = 0;
 	  var currColour;
+	  
 	  if (metritis==5){metritis=0;}
+	  
 	  metritis++;
 	  
 	  if (metritis==1){ currColour='red';}else 
