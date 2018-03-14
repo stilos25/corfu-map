@@ -1,4 +1,4 @@
-// The Google Map. 
+// The Google Map.
 var map;
 
 var geoJsonOutput;
