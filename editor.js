@@ -4,11 +4,14 @@ var map;
 var geoJsonOutput;
 var downloadLink;
 
+var stili;
+var selectedFeature;
+
 function init() {
   // Initialise the map.
   map = new google.maps.Map(document.getElementById('map-holder'), {
-center: {lat: 39.620803, lng: 19.9207394},
-zoom: 16,
+    center: {lat: 39.620803, lng: 19.9207394},
+    zoom: 16,
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: false,
@@ -21,15 +24,25 @@ zoom: 16,
     draggable: true,
     clickable: true
   });
+  
+  map.data.addListener("click",function(selected){
+  	 selectedFeature = selected.feature;
+  	 map.data.revertStyle();
+  	 map.data.overrideStyle(selectedFeature,{strokeWeight: 6});
+  });
+
+  map.data.loadGeoJson("data/geojson1.json");
 
   bindDataLayerListeners(map.data);
 
-map.data.loadGeoJson("data/paths.json");
-
   // Retrieve HTML elements.
+  stili = document.getElementById('stili');
   var mapContainer = document.getElementById('map-holder');
   geoJsonOutput = document.getElementById('geojson-output');
   downloadLink = document.getElementById('download-link');
+
+  resize();
+  google.maps.event.addDomListener(window, 'resize', resize);
 }
 
 google.maps.event.addDomListener(window, 'load', init);
@@ -37,7 +50,7 @@ google.maps.event.addDomListener(window, 'load', init);
 // Refresh different components from other components.
 function refreshGeoJsonFromData() {
   map.data.toGeoJson(function(geoJson) {
-    geoJsonOutput.value = JSON.stringify(geoJson);
+    geoJsonOutput.value = JSON.stringify(geoJson, null ,2);
     refreshDownloadLinkFromGeoJson();
   });
 }
@@ -52,4 +65,29 @@ function bindDataLayerListeners(dataLayer) {
   dataLayer.addListener('addfeature', refreshGeoJsonFromData);
   dataLayer.addListener('removefeature', refreshGeoJsonFromData);
   dataLayer.addListener('setgeometry', refreshGeoJsonFromData);
+}
+
+function DelAll(){
+	map.data.forEach(function(features){
+		map.data.remove(features);
+	});
+}
+
+function DelSel(){
+	map.data.remove(selectedFeature);
+}
+
+function showButton() {
+  var stili_mou = document.getElementById('geojson-output').style.display;
+  if(stili_mou === "none"){
+          document.getElementById('geojson-output').style.display = "block";
+  }else{
+          document.getElementById('geojson-output').style.display = "none";
+  }
+}
+
+function resize() {
+  var geoJsonOutputRect = geoJsonOutput.getBoundingClientRect();
+  var stiliRect = stili.getBoundingClientRect();
+  geoJsonOutput.style.height = stiliRect.bottom - geoJsonOutputRect.top - 8 + "px";
 }

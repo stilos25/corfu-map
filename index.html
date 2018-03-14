@@ -9,8 +9,16 @@
     <script src="editor.js"></script>
   </head>
   <body>
-    <textarea id="geojson-output" placeholder="See edits in GeoJson."></textarea>
 	<div id="map-holder"></div>
-	<a id="download-link" href="data:;base64," download="geojson.json"><button>Download GeoJson</button></a>
+	<div id="stili">
+		<a id="download-link" href="data:;base64," download="geojson.json"><button>Download GeoJson</button></a>
+		<button class="klasi" onclick="showButton()">Hide/Show</button>
+    <div id="controls">
+      <button onclick="DelAll()" class="klasi">Delete All</button>
+      <button onclick="DelSel()" class="klasi">Delete Selected</button>
+    </div>
+		<textarea id="geojson-output" placeholder="See edits in GeoJson."></textarea>
+
+	</div>
   </body>
 </html>
