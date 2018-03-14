@@ -28,7 +28,7 @@ function init() {
   });
   
   map.data.setStyle(function(feature) {
-        var colour = "white";
+        var colour = 'white';
         if (feature.getProperty("Rating") == null && feature.getProperty("Colour") == null ) {
             feature.setProperty("Rating", PropertyValue);
             feature.setProperty("Colour", PropertyValue);
