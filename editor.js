@@ -60,8 +60,8 @@ function init() {
 	  if (metritis==4){ colour='green';}else
 	  if (metritis==5){ colour='blue';}
 	  
-	  rate.features.setProperty("Rating", metritis);
-	  rate.features.setProperty("Colour", colour);
+	  rate.setProperty("Rating", metritis);
+	  rate.setProperty("Colour", colour);
   });
 	
   map.data.loadGeoJson("data/geojson.json");
