@@ -48,7 +48,7 @@ function init() {
   	 map.data.overrideStyle(selectedFeature,{strokeWeight: 6});
   });
 
-  map.data.addListener("rightclick",function(rate){
+  map.data.addListener("rightclick",function(feature){
 	  var metritis = 0;
 	  var colour;
 	  if (metritis==5){metritis=0;}
@@ -60,8 +60,8 @@ function init() {
 	  if (metritis==4){ colour='green';}else
 	  if (metritis==5){ colour='blue';}
 	  
-	  rate.feature.setProperty("Rating", metritis);
-	  rate.feature.setProperty("Colour", colour);
+	  feature.setProperty("Rating", metritis);
+	  feature.setProperty("Colour", colour);
   });
 	
   map.data.loadGeoJson("data/geojson.json");
