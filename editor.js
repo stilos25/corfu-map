@@ -1,5 +1,5 @@
-// The Google Map.
-var map;
+// The Google Map. 
+var map; 
 
 var geoJsonOutput;
 var downloadLink;
