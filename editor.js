@@ -28,16 +28,16 @@ function init() {
   });
   
   map.data.setStyle(function(feature) {
-        var color = "white";
-        if (feature.getProperty("Rating") == null && feature.getProperty("Color") == null ) {
+        var colour = "white";
+        if (feature.getProperty("Rating") == null && feature.getProperty("Colour") == null ) {
             feature.setProperty("Rating", PropertyValue);
-            feature.setProperty("Color", PropertyValue);
+            feature.setProperty("Colour", PropertyValue);
         }
-        if (feature.getProperty("Color") != PropertyValue) {
-            var color = feature.getProperty("Color");
+        if (feature.getProperty("Colour") != PropertyValue) {
+            var colour = feature.getProperty("Colour");
         }
         return ({
-            strokeColor: color,
+            strokeColour: colour,
             strokeWeight: 4
 	});
    });
@@ -61,6 +61,7 @@ function init() {
 	  if (metritis==5){ colour='blue';}
 	  
 	  rate.features.setProperty("Rating", metritis);
+	  rate.features.setProperty("Colour", colour);
   });
 	
   map.data.loadGeoJson("data/geojson.json");
