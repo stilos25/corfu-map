@@ -98,6 +98,7 @@ function bindDataLayerListeners(dataLayer) {
   dataLayer.addListener('addfeature', refreshGeoJsonFromData);
   dataLayer.addListener('removefeature', refreshGeoJsonFromData);
   dataLayer.addListener('setgeometry', refreshGeoJsonFromData);
+  dataLayer.addListener('setproperty', refreshGeoJsonFromData);
 }
 
 function DelAll(){
