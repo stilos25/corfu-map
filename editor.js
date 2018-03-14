@@ -55,7 +55,7 @@ function init() {
 	  console.log("mpike mes tin sinartisi");
   });
 	
-  map.data.loadGeoJson("data/2016057.geojson");
+  map.data.loadGeoJson("data/2016057_review.geojson");
 
   bindDataLayerListeners(map.data);
 
